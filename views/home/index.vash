@@ -1,0 +1,30 @@
+@html.extend('_layout', function(model){
+
+    @html.block('content', function(model){
+
+        <div class="container">
+         <div class="justify-content-md-center row">
+            <div class="col-md-8">
+               <div class="jumbotron">
+                  <h1>Plyst App</h1>
+                  <p>
+                    App de playlists<br />
+                    Assista qualquer desenho online grátis sem propaganda sem virus <br />
+                    Apenas utilizando os repositórios da Animes.vip e Animes.biz <br />
+                    O anime de Boruto foi abstraído
+                  </p>
+                  <p>
+                     <a href="/view/boruto" class="btn btn-outline-primary" role="button">Boruto</a>
+                     <a href="/view/anvp" class="btn btn-outline-primary" role="button">Animes.vip</a>
+                     <a href="/view/bz" class="btn btn-outline-primary" role="button">Animes.biz</a>
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+
+    })
+
+    @html.block('scripts', function(model){})
+
+})

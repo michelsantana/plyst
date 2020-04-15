@@ -1,0 +1,89 @@
+@html.extend('_layout', function(model){
+
+    @html.block('content', function(model){
+
+      @html.extend('anvp/_form', function(model){})
+
+      @html.extend('_modal', function(model){})
+
+    })
+
+    @html.block('scripts', function(model){
+
+       <script>
+                
+         var list = [];
+         var modalShow = false;
+
+         function Pesquisar(){
+            progress.start();
+            var repo = $('#txtRepo').val();
+            $.get('/view/anvp/list?repository=' + repo, function(result){
+               $('#list-container').append(result);
+               list = JSON.parse($('#rawlinks').val());
+               progress.complete();
+            });
+         }
+
+         function Assistir(episode, onEpisodeEnd){
+            
+            if(!modalShow)
+               $('#modal').modal('show');
+
+            LimparVideo();
+
+            $.get('/view/anvp/watch?ep=' + episode, function (r) {
+               $('.modal-body').append(r);
+               if (onEpisodeEnd) {
+                  $('video')[0].addEventListener('ended', onEpisodeEnd, false);
+               }
+            });
+         }
+
+         function Aleatorio(){
+            if(list.length == 0){
+               Pesquisar();
+               return;
+            }
+
+            var ep = random(list.length - 1);
+
+            Assistir(list[ep], function OnVideoEnded() {
+            
+               var ep = random(list.length - 1);
+               Assistir(list[ep]);
+            
+            });
+         }
+
+         function LimparVideo(){
+            $('.modal-body').html('');
+         }
+
+         function random(max) { return Math.floor(Math.random() * max) + 1; }
+
+         $(document).ready(function () {
+
+            $('#btnPesquisar').on('click', function (e) {
+               Pesquisar();
+            });
+
+            $('.random').on('click', function (e) {
+               Aleatorio();
+            });
+
+            $('#modal').on('hidden.bs.modal', function (e) {
+               LimparVideo();
+               modalShow = false;
+            });
+
+            $('#modal').on('shown.bs.modal', function (e) { 
+               modalShow = true;
+            });
+
+         });
+       </script>
+
+    })
+
+})

@@ -1,0 +1,42 @@
+@html.extend('_layout', function(model){
+
+    @html.block('content', function(model){
+
+      @html.extend('boruto/_form', function(model){})
+
+      @html.extend('_modal', function(model){})
+
+    })
+
+    @html.block('scripts', function(model){
+
+       <script>
+         $(document).ready(function () {
+
+            $('#btnPesquisar').click(function () {
+
+               $('#modal').modal('show');
+
+            });
+
+            $('#modal').on('hidden.bs.modal', function (e) {
+
+               $('video').remove();
+
+            });
+
+            $('#modal').on('shown.bs.modal', function (e) {
+               
+               var ep = $('#txtEp').val();
+               $.get('/view/boruto/watch?ep=' + ep, function(result) {
+                  $('.modal-body').append(result);
+               });
+
+            });
+
+         });
+       </script>
+
+    })
+
+})

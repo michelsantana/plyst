@@ -1,0 +1,12 @@
+@{model.type = model.type || 'video'}
+
+@if(model.type == 'video'){
+   <video width="100%" controls> 
+      <source src="@model.url" type="video/mp4" /> 
+      <source src="@model.url" type="video/ogg" /> 
+      <source src="@model.url" type="video/webm" /> 
+   </video>
+}
+@if(model.type == 'iframe'){
+   <iframe class="metaframe rptss" src="@model.url" frameborder="0" scrolling="no" allowfullscreen width="100%" height="340"></iframe>
+}

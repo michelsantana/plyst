@@ -1,0 +1,70 @@
+@html.extend('_layout', function(model){
+
+    @html.block('content', function(model){
+
+      @html.extend('bz/_form', function(model){})
+
+      @html.extend('_modal', function(model){})
+
+    })
+
+    @html.block('scripts', function(model){
+
+       <script>
+                
+         var list = [];
+         var modalShow = false;
+
+         function Pesquisar(){
+            progress.start();
+            var repo = $('#txtRepo').val();
+            $.get('/view/bz/list?repository=' + repo , function(result){
+               $('#list-container').append(result);
+               list = JSON.parse($('#rawlinks').val());
+               progress.complete();
+            });
+         }
+
+         function Assistir(episode){
+            
+            if(!modalShow)
+               $('#modal').modal('show');
+
+            LimparVideo();
+
+            $.get('/view/bz/watch?ep=' + episode, function (r) {
+               $('.modal-body').append(r);
+            });
+         }
+
+         function LimparVideo(){
+            $('.modal-body').html('');
+         }
+
+         function random(max) { return Math.floor(Math.random() * max) + 1; }
+
+         $(document).ready(function () {
+
+            $('#btnPesquisar').on('click', function (e) {
+               Pesquisar();
+            });
+
+            $('.random').on('click', function (e) {
+               Aleatorio();
+            });
+
+            $('#modal').on('hidden.bs.modal', function (e) {
+               LimparVideo();
+               modalShow = false;
+            });
+
+            $('#modal').on('shown.bs.modal', function (e) { 
+               modalShow = true;
+            });
+
+         });
+       </script>
+
+    })
+
+})

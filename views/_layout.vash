@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+   <title>@model.title</title>
+   <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+   />
+   <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+   ></script>
+   <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+   ></script>
+   <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+   ></script>
+   <script>
+      //RPN resolver
+      function RPN(rpn) {
+         var tokens = ['+', '-', '*', '/'];
+         var isToken = function (e) {
+            if (tokens.indexOf(e) > -1) return true;
+            return false;
+         };
+         var resolutionStack = [];
+         for (var exp of rpn) {
+            if (isToken(exp)) {
+               var value1 = resolutionStack[resolutionStack.length - 2];
+               var value2 = resolutionStack[resolutionStack.length - 1];
+               var evaluation = eval(value1 + exp + value2);
+               resolutionStack.pop();
+               resolutionStack.pop();
+               resolutionStack.push(evaluation);
+            } else {
+               resolutionStack.push(exp);
+            }
+         }
+         return resolutionStack; 
+      }
+   </script>
+</head>
+	<body>		
+
+		@html.extend('_header', function(model){ })
+		
+		@html.block('content')
+
+		<footer>
+			@html.block('footer')	
+		</footer>
+
+      @html.extend('_progress', function(model){ })
+
+      @html.block('scripts')
+	</body>
+</html>

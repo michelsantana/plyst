@@ -1,0 +1,32 @@
+<div class="container">
+   <div class="justify-content-md-center row">
+      <div class="col-md-8">
+         <div class="jumbotron">
+            <h1>Animes.biz</h1>
+            <h5>
+               <a href="https://animesonline.bz/">
+                  https://animesonline.bz/
+               </a>
+            </h5>
+            <p>
+               Assistir desenhos online grátis sem propaganda sem vírus
+            </p>
+            <p>
+               <input id="txtRepo" placeholder="Repositório dos episódios" type="text" class="form-control form-control-lg" 
+               value="@model.repository"
+               />
+            </p>
+            <p>
+               <button id="btnPesquisar" type="button" class="btn btn-primary">
+                  Pesquisar
+               </button>
+            </p>
+         </div>
+      </div>
+   </div>
+   <div class="justify-content-md-center row">
+      <div class="col-md-8" id="list-container">
+         
+      </div>
+   </div>
+</div>

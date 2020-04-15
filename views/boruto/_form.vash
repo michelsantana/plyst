@@ -1,0 +1,25 @@
+<div class="container">
+   <div class="justify-content-md-center row">
+      <div class="col-md-8">
+         <div class="jumbotron">
+            <h1>Boruto</h1>
+            <p>Assistir Boruto online grátis sem propaganda sem vírus</p>
+            <p>
+               <input id='txtEp' placeholder="Número do episódio" type="text" class="form-control form-control-lg" />
+            </p>
+            <p>
+               <button id="btnPesquisar" type="button" class="btn btn-primary">
+                  Assistir
+               </button>
+            </p>
+            <p>Ultimos episódios:
+               <div id="dvUltimosEps">
+               @model.lastEpisodes.forEach(function(ep){
+                  <div><span class="badge badge-info">@ep.title</span></div>
+               })
+               </div>
+            </p>
+         </div>
+      </div>
+   </div>
+</div>

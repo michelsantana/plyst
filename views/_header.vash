@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+   <span class="navbar-brand">Plyst</span>
+   <div class="mr-auto navbar-nav">
+      <a href="/view/" class="nav-link" role="button">
+         Home
+      </a>
+      <a href="/view/boruto" class="nav-link" role="button">
+         Boruto
+      </a>
+      <a href="/view/anvp" class="nav-link" role="button">
+         Animes.vip
+      </a>
+      <a href="/view/bz" class="nav-link" role="button">
+         Animes.biz
+      </a>
+   </div>
+</nav>

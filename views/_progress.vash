@@ -1,0 +1,66 @@
+<div id='progress' class="progress" 
+   style="
+      position: absolute;
+      top: 0;
+      z-index: 999999;
+      left: 0;
+      height: 5px;
+      width: 100%;
+      border-radius: 0;
+      display: none;
+   ">
+   <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" 
+      data-width="75"
+      style="width: 75%">
+   </div>
+</div>
+<script>
+
+   var Progress = function() {
+      var $this = new Object();
+
+      $this.container = $('#progress');
+      $this.bar = $('#progress .progress-bar');
+      $this.interval = undefined;
+      
+      $this.set = function(width){
+         $this.bar.attr('data-width', (width));
+         $this.bar.css('width', (width) + '%');
+      }
+      $this.width = function(){
+         return $this.bar.attr('data-width');
+      }
+
+      $this.start = function(){
+         if(!$this.interval) {
+            $this.container.show();
+            $this.interval = setInterval(function(){
+               var width = ~~$this.width();
+               console.log(width);
+               if(width >= 100)
+                  clearInterval($this.interval);
+               var rpn = [100, width, '-', 0.1, '*', width, '+'];
+               var calc = RPN(rpn)[0]; 
+               console.log(calc);
+               $this.set(calc);
+            }, 400);
+         }
+      }
+
+      $this.stop = function(){
+         clearInterval($this.interval);
+      }
+
+      $this.complete = function(){
+         $this.set(100);
+         setTimeout(function(){ $this.container.hide(); $this.set(0);  }, 1000);
+      }
+
+      $this.set(0);
+
+      return $this;
+   };
+
+   var progress = new Progress();
+
+</script>

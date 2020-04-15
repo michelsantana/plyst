@@ -1,0 +1,10 @@
+<input type="hidden" id='rawlinks' value='@JSON.stringify(model.episodes)' />
+<div class="list-group">
+   @model.episodes.forEach(function(ep){
+      <div class="list-group-item">
+         <button type="button" class="btn btn-link" onClick="Assistir('@ep')">
+               @ep
+         </button>
+      </div>
+   })
+</div>
